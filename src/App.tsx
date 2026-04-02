@@ -1,8 +1,10 @@
+import { useAppSelector } from "./hooks/redux";
 import "./App.css";
 
 //
 function App() {
   //
+  const {} = useAppSelector((state) => state);
 
   //
   return (
