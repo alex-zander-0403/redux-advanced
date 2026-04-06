@@ -1,31 +1,41 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, isAction, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "../../models/IUser";
+import { fetchUsers } from "./ActionCreators";
 
 //
 interface UserState {
   users: IUser[];
   isLoading: boolean;
   error: string;
-  count: number;
 }
 
 const initialState: UserState = {
   users: [],
   isLoading: false,
   error: "",
-  count: 0,
 };
 
 //
 export const userSlice = createSlice({
-  name: "user", // префикс для экшенов (будет 'user/countIncrement')
-  initialState: initialState, // начальное состояние
+  name: "user",
+  initialState: initialState,
+  reducers: {},
 
-  // объект с редюсерами (они же экшены)
-  reducers: {
-    countIncrement(state, action: PayloadAction<number>) {
-      state.count += action.payload;
-    },
+  // Современный способ записи extraReducers (рекомендуемый)
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUsers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.users = action.payload;
+        state.isLoading = false;
+        state.error = "";
+      })
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 
