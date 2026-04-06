@@ -3,6 +3,7 @@ import { userSlice } from "./store/reducers/UserSlice";
 import { useEffect } from "react";
 import { fetchUsers } from "./store/reducers/ActionCreators";
 import "./App.css";
+import { PostContainer } from "./components/PostContainer";
 
 //
 function App() {
@@ -28,6 +29,8 @@ function App() {
     <div className="App">
       <h1>Hello, users!</h1>
       {JSON.stringify(users, null, 2)}
+
+      <PostContainer />
     </div>
   );
 }

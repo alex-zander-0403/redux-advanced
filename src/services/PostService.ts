@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IPost } from "../models/IPost";
 
 //
 export const postAPI = createApi({
@@ -12,10 +13,13 @@ export const postAPI = createApi({
 
   // Определяем эндпоинты
   endpoints: (build) => ({
-    fetchAllPosts: build.query({
+    fetchAllPosts: build.query<IPost[], number>({
       // GET запрос
-      query: () => ({
+      query: (limit = 5) => ({
         url: "/posts",
+        params: {
+          _limit: limit,
+        },
       }),
     }),
   }),
