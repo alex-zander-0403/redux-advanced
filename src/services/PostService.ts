@@ -6,7 +6,7 @@ export const postAPI = createApi({
   // Уникальное имя для этого API в глобальном store
   reducerPath: "postApi",
 
-  // Базовая конфигурация для всех запросов.
+  // конфигурация для запросов
   baseQuery: fetchBaseQuery({
     baseUrl: "https://jsonplaceholder.typicode.com/",
   }),

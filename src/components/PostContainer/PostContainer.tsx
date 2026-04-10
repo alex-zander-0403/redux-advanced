@@ -1,4 +1,5 @@
-import { postAPI } from "../services/PostService";
+import { postAPI } from "../../services/PostService";
+import { PostItem } from "../PostItem/PostItem";
 
 export function PostContainer() {
   const { data: posts, isLoading, error } = postAPI.useFetchAllPostsQuery(5);
@@ -9,15 +10,7 @@ export function PostContainer() {
 
       {error && <h3>Ошибка загрузки постов!</h3>}
 
-      {posts &&
-        posts.map((post) => {
-          return (
-            <div key={post.id}>
-              <h3>{post.title}</h3>
-              <p>{post.body}</p>
-            </div>
-          );
-        })}
+      {posts && posts.map((post) => <PostItem key={post.id} post={post} />)}
     </div>
   );
 }
