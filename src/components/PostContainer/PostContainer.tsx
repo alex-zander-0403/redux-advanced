@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { postAPI } from "../../services/PostService";
 import { PostItem } from "../PostItem/PostItem";
 
+//
 export function PostContainer() {
   const {
     data: posts,

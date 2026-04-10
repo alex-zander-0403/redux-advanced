@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
-import { userSlice } from "./store/reducers/UserSlice";
+
 import { useEffect } from "react";
 import { fetchUsers } from "./store/reducers/ActionCreators";
-import "./App.css";
 import { PostContainer } from "./components/PostContainer/PostContainer";
+import "./App.css";
 
 //
 function App() {

@@ -32,13 +32,15 @@ export const fetchUsers = createAsyncThunk(
   // 2-й аргумент: асинхронная функция-создатель payload
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get<IUser[]>(
-        "https://jsonplaceholder.typicode.com/users",
-      );
+      // const response = await axios.get<IUser[]>(
+      //   "https://jsonplaceholder.typicode.com/users",
+      // );
 
       // Возвращаем полученные данные
       // Они станут payload для fulfilled экшена
-      return response.data;
+      // return response.data;
+
+      return [];
     } catch (error) {
       return thunkAPI.rejectWithValue("ошибка 1");
     }
