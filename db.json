@@ -1,13 +1,8 @@
 {
   "posts": [
     {
-      "id": "1",
-      "title": "json server 1 title",
-      "body": "Builds the app for production to the build folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes. Your app is ready to be deployed!"
-    },
-    {
       "id": "2",
-      "title": "json server 2 title",
+      "title": "12222",
       "body": "Builds the app for production to the build folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes. Your app is ready to be deployed!"
     },
     {
@@ -49,16 +44,6 @@
       "id": "10",
       "title": "json server 10 title",
       "body": "Builds the app for production to the build folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes. Your app is ready to be deployed!"
-    },
-    {
-      "title": "123",
-      "body": "123",
-      "id": "PAzOkDvxG94"
-    },
-    {
-      "title": "444",
-      "body": "444",
-      "id": "nLtCzCcuEGI"
     }
   ],
   "comments": [

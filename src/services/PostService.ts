@@ -3,20 +3,16 @@ import { IPost } from "../models/IPost";
 
 //
 export const postAPI = createApi({
-  // Уникальное имя для этого API в глобальном store
   reducerPath: "postApi",
-
-  // Базовая конфигурация для всех запросов (query)
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000",
   }),
-
-  // 1 - ОБЪЯВЛЯЕМ ТЕГИ: какие типы данных у нас есть
   tagTypes: ["Post"],
 
-  // эндпоинт для получения данных (query-get, mutation-POST/PUT/DELETE)
   endpoints: (build) => ({
-    // GET запрос
+    //
+    // GET -------------------
+
     fetchAllPosts: build.query<IPost[], number>({
       query: (limit = 3) => ({
         url: `/posts`,
@@ -25,12 +21,11 @@ export const postAPI = createApi({
         // },
       }),
 
-      // 2 - QUERY: получаем данные и указываем к какому тегу они относятся
-      // RTK Query сохраняет данные и помечает их тегом "Post"
       providesTags: (result) => ["Post"],
     }),
 
-    // post
+    // POST -------------------
+
     createPost: build.mutation<IPost, IPost>({
       query: (newPost) => ({
         url: `/posts`,
@@ -38,13 +33,29 @@ export const postAPI = createApi({
         body: newPost,
       }),
 
-      // 3. MUTATION: изменяем данные и указываем какие теги нужно обновить
-      // RTK Query видит устаревшие данные с тегом 'Post' и удаляет их из кеша
+      invalidatesTags: ["Post"],
+    }),
+
+    // UPDATE -------------------
+
+    updatePost: build.mutation<IPost, IPost>({
+      query: (updatedPost) => ({
+        url: `/posts/${updatedPost.id}`,
+        method: "PUT",
+        body: updatedPost,
+      }),
+
+      invalidatesTags: ["Post"],
+    }),
+
+    // DELETE -------------------
+    deletePost: build.mutation<IPost, IPost>({
+      query: (postForDelete) => ({
+        url: `/posts/${postForDelete.id}`,
+        method: "DELETE",
+      }),
+
       invalidatesTags: ["Post"],
     }),
   }),
 });
-
-// <IPost[], number>
-// первый арг - что возвращаем
-// второй - что будет принимать сгенерированный хук

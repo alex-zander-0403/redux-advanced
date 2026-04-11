@@ -4,6 +4,7 @@ import { IPost } from "../../models/IPost";
 
 //
 export function PostContainer() {
+  //
   const {
     data: posts,
     isLoading,
@@ -11,11 +12,32 @@ export function PostContainer() {
     refetch,
   } = postAPI.useFetchAllPostsQuery(5);
 
-  const [createPost, {}] = postAPI.useCreatePostMutation();
+  //
+  const [createPost, { error: createError, isLoading: createIsLoading }] =
+    postAPI.useCreatePostMutation();
 
+  //
+  const [updatePost, {}] = postAPI.useUpdatePostMutation();
+
+  //
+  const [deletePost, {}] = postAPI.useDeletePostMutation();
+
+  // -----------------------
+
+  // обертка для postAPI/createPost
   const handleCreate = async () => {
     const title = prompt();
     await createPost({ title, body: title } as IPost);
+  };
+
+  // обертка для postAPI/updatePost
+  const handleUpdate = async (post: IPost) => {
+    await updatePost(post);
+  };
+
+  // обертка для postAPI/deletePost
+  const handleDelete = async (post: IPost) => {
+    await deletePost(post);
   };
 
   return (
@@ -26,7 +48,16 @@ export function PostContainer() {
       <button onClick={() => refetch()}>Refetch</button>
 
       <button onClick={handleCreate}>Добавить пост</button>
-      {posts && posts.map((post) => <PostItem key={post.id} post={post} />)}
+
+      {posts &&
+        posts.map((post) => (
+          <PostItem
+            key={post.id}
+            post={post}
+            update={handleUpdate}
+            remove={handleDelete}
+          />
+        ))}
     </div>
   );
 }
